@@ -21,6 +21,9 @@ Features:
  * cli control with `--debug-ui` arg
  * cool react & socket.io based client
 
+![files interface][files]
+![log interface][log]
+
 See the [annotated source][1] or [github repo][2]
 
 ## install
@@ -105,4 +108,6 @@ branch.
  - **MIT** : http://opensource.org/licenses/MIT
 
 [1]: https://leviwheatcroft.github.io/metalsmith-debug-ui "annotated source"
-[2]:
+[2]: https://github.com/leviwheatcroft/metalsmith-debug-ui "github repo"
+[files]: http://leviwheatcroft.github.io/metalsmith-debug-ui/images/files.png
+[log]: http://leviwheatcroft.github.io/metalsmith-debug-ui/images/log.png

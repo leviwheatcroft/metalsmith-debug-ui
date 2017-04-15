@@ -20,7 +20,7 @@
     "readme": "node-readme",
     "babel": "cross-env NODE_ENV=node6 babel lib -d dist --ignore client",
     "babel:watch": "cross-env NODE_ENV=node6 babel lib --watch -d dist --ignore client",
-    "docs": "npm run readme && rm -fr ./docs/* && docker -o ./docs -I -x dist,.README.md,test/fixtures,node_modules,docs,.store,config",
+    "docs": "npm run readme && rm -fr ./docs/* && docker -o ./docs -I -x dist,.README.md,test/fixtures,node_modules,docs,.store,config && cp --parents images/* docs",
     "gh-pages": "gh-pages -d docs",
     "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --check-coverage --lines 100 npm run test",
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register test",
