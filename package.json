@@ -15,7 +15,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm run babel && npm run docs && cp docs/Readme.md.html docs/index.html && npm run gh-pages",
+    "build": "npm run babel && npm run client && npm run docs && cp docs/Readme.md.html docs/index.html && npm run gh-pages",
     "client": "node dist/build && npm run webpack",
     "readme": "node-readme",
     "babel": "cross-env NODE_ENV=node6 babel lib -d dist --ignore client",
