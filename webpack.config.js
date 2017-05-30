@@ -1,21 +1,19 @@
 const webpack = require('webpack')
 const path = require('path')
 const baseDir = __dirname
+const prodn = process.env.NODE_ENV === 'production'
+console.log(`webpack ${prodn ? 'production' : 'development'} build`)
 
 const config = {
-  devtool: 'cheap-source-map',
+  devtool: prodn ? 'eval' : 'source-map',
   entry: path.resolve(baseDir, 'lib', 'client', 'client.js'),
   output: {
     path: path.resolve(baseDir, 'dist', 'client'),
     filename: 'client.js'
   },
   resolve: {
-    alias: {
-      // jquery: 'jquery/src/jquery' // ,
-      // 'react-json-tree/lib': 'react-json-tree/lib',
-      // 'react-json-tree': 'react-json-tree',
-      // 'react': 'react'
-    }
+    extensions: ['.js', '.jsx'],
+    alias: {}
   },
   module: {
     rules: [
@@ -23,8 +21,10 @@ const config = {
         test: /\.(js|jsx)$/,
         include: [
           path.resolve(baseDir, 'lib'),
-          path.resolve(baseDir, 'lib', 'client')
+          path.resolve(baseDir, 'lib', 'client'),
+          path.resolve(baseDir, 'lib', 'client', 'Components')
         ],
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -38,26 +38,11 @@ const config = {
     ]
   },
   plugins: [
-    // new webpack.ProvidePlugin({
-    //   // $: 'jquery' // ,
-    //   // jQuery: 'jquery',
-    //   // jsonview: 'jsonview',
-    //   // bootstrap: 'bootstrap'
-    // }),
-    // react needs to be built with NODE_ENV = 'production'
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    // new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      output: { comments: false },
-      sourceMap: true
-    })
-  ]
+    // prodn ? new webpack.ProvidePlugin({
+    //   React: 'react' // doesn't work
+    // }) : false,
+    prodn ? new webpack.optimize.UglifyJsPlugin() : false
+  ].filter((e) => (e))
 }
 
 module.exports = config

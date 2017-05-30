@@ -16,7 +16,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run babel && npm run client && npm run docs && cp docs/README.md.html docs/index.html && npm run gh-pages",
-    "client": "node dist/build && npm run webpack",
+    "client": "cross-env DEBUG=metalsmith* babel-node build",
+    "client:prodn": "cross-env DEBUG=metalsmith* NODE_ENV=production babel-node build",
     "readme": "node-readme",
     "babel": "cross-env NODE_ENV=node6 babel lib -d dist --ignore client",
     "babel:watch": "cross-env NODE_ENV=node6 babel lib --watch -d dist --ignore client",
@@ -27,7 +28,6 @@
     "test:watch": "cross-env NODE_ENV=test mocha --compilers js:babel-register --watch test",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
-    "webpack": "webpack --config webpack.config.js",
     "watch": "npm-watch"
   },
   "watch": {
@@ -53,6 +53,7 @@
     "debug": "^2.2.0",
     "lodash.set": "^4.3.2",
     "lodash.transform": "^4.6.0",
+    "metalsmith-move": "github:leviwheatcroft/metalsmith-move",
     "sha1": "^1.1.1",
     "socket.io": "^1.7.3",
     "st": "^1.2.0",
@@ -76,6 +77,7 @@
     "babel-register": "^6.16.3",
     "bootstrap": "^3.3.7",
     "bootstrap-webpack": "0.0.6",
+    "browser-request": "^0.3.3",
     "chai": "^3.5.0",
     "concurrently": "^3.4.0",
     "config": "^1.24.0",
@@ -93,6 +95,7 @@
     "file-loader": "^0.11.1",
     "gh-pages": "^0.12.0",
     "hjson": "^2.4.1",
+    "immutability-helper": "^2.2.2",
     "imports-loader": "^0.7.1",
     "jquery": "^3.2.1",
     "jsonview": "^1.2.0",
@@ -103,7 +106,6 @@
     "metalsmith-ignore": "^0.1.2",
     "metalsmith-in-place": "^2.0.1",
     "metalsmith-less": "^2.0.0",
-    "metalsmith-webpack": "^1.0.3",
     "mocha": "^3.1.2",
     "mocha-eslint": "^3.0.1",
     "nock": "^9.0.2",
@@ -144,31 +146,9 @@
   },
   "babel": {
     "presets": [
-      "stage-0"
-    ],
-    "plugins": [
-      "add-module-exports"
-    ],
-    "env": {
-      "test": {
-        "presets": [
-          "es2015-node6"
-        ],
-        "plugins": [
-          "istanbul"
-        ]
-      },
-      "node4": {
-        "presets": [
-          "es2015-node4"
-        ]
-      },
-      "node6": {
-        "presets": [
-          "es2015-node6"
-        ]
-      }
-    }
+      "stage-0",
+      "es2015-node6"
+    ]
   },
   "nyc": {
     "include": [
