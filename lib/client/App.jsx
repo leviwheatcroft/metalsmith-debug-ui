@@ -38,14 +38,6 @@ export default class App extends Component {
         </div>
         <div className="row margin-top">
           <div className="col">
-            <div className="btn-group" role="group" aria-label="...">
-              <button id="do-all" className="btn btn-default" type="button">Run Remaining</button>
-              <button id="do-next" className="btn btn-default" type="button">Run Next</button>
-            </div>
-          </div>
-        </div>
-        <div className="row margin-top">
-          <div className="col">
             <Tabs defaultActiveKey={1} id='main-nav-tabs'>
               <Tab eventKey={1} title="Files">
                 <TreeByPlugin
