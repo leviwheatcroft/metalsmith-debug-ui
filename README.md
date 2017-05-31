@@ -12,14 +12,14 @@
 
 Browser based debug interface for [metalsmith](https://metalsmith.io)
 
-Pauses build process after each plugin and allows you to explore files structure
-and metadata before continuing.
+Provides nice ui to navigate metalsmith files and metadata, allowing you to
+view any stage of the build process
 
 Features:
 
  * nice ui for exploring files & metadata
- * cli control with `--debug-ui` arg
- * cool react & socket.io based client
+ * can jump forwards and backwards through the build process
+ * cool react based client
 
 ![files interface][files]
 ![log interface][log]
@@ -32,56 +32,65 @@ See the [annotated source][1] or [github repo][2]
 
 ## usage
 
-Because this plugin needs to mutate the metalsmith instance, it can't be called
-as a regular plugin, you need to patch the metalsmith instance as shown.
+`metalsmith-debug-ui` clones your metalsmith files and metadata strutures at
+different times during the build process and stores this history. Then it
+injects a browser based client into your build output which allows you to view
+that history.
+
+### report on every plugin
+
+In this mode you need to patch your metalsmith instance with `debugUi.patch`.
 
 ```javascript
 import Metalsmith from 'metalsmith'
 import debugUi from 'metalsmith-debug-ui'
 
 let ms = Metalsmith('src')
-debugUi(ms, { always: true, port: 5050 })
+
+debugUi.patch(ms)
 
 ms
 .use(...)
 .build(...)
 ```
 
-To initiate debug-ui you need to pass command line arg `--debug-ui`, or pass
-the option `always: true`.
+### report at specific points
+
+Just call `debugUi.report` as a plugin
+
+```javascript
+import Metalsmith from 'metalsmith'
+import debugUi from 'metalsmith-debug-ui'
+
+let ms = Metalsmith('src') // no need to patch
+
+debugUi.patch(ms)
+
+ms
+.use(myFirstPlugin({...}))
+.use(mySecondPlugin({...}))
+.use(debug.report('stage 1'))
+.use(myFirstPlugin({...}))
+.use(debug.report('stage 2'))
+.build(...)
+```
+
+### viewing output
+
+The client should be built with the rest of your site, and will be located at
+`debug-ui/index.html` in your build directory. You should use your favourite
+static development server to view it in the same way you would view anything
+else in your build directory.
 
 ## options
 
-*always*: {Boolean} (Default: false) if true, debug-ui will run without
-`--debug-ui` command line arg.
-*port*: {Number} (Default: 8081) http port
+nil
 
 ## plugin compatibility
-Far as I'm aware all plugins will work when using debug ui.
 
-However plugins need to explicitly use debug-ui's log function wrapper in order
-for their debug output to show up in debug-ui, and most plugins don't do that
-at this time. The example below show's how to do that.
-
-In addition, debug-ui can only identify plugins which export a named function
-as the plugin. The example shows that too.
-
-```javascript
-// metalsmith-witty-quote-generator
-import debug from 'debug'
-
-// start debugging as normal
-const dbg = debug('witty-quote-generator')
-
-export default function (options) {
-  // use named function here
-  return function wittyQuoteGenerator(files, metalsmith, done) {
-    // patch debug.log like this
-    debug.log = metalsmith.log || debug.log
-    // ... your plugin logic
-  }
-}
-```
+Some plugins may not write to the `debug-ui` log, although I haven't found any
+yet. In theory any plugins using `debug v2.x.x` should work. If you find one
+please post an issue.
 
 ## testing
 
