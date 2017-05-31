@@ -21,9 +21,9 @@ export default class LogWarning extends Component {
       <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss.bind(this)}>
         <h4>Not logging all the things?</h4>
         <p>
-          Sadly, debug-ui cant hook writes to debug, so for now other modules
-          will need to explicitly support writing to this log, which is probably
-          not going to happen :(
+          It's possible that a plugin's output may not be captured here. If you
+          find one please <a href='https://git.io/vH4DC'>log an issue</a> about
+          it!
         </p>
         <p>
           <Button onClick={this.handleAlertDismiss.bind(this)} bsStyle="danger">Ok, got it</Button>

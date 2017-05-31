@@ -28,7 +28,8 @@
     "test:watch": "cross-env NODE_ENV=test mocha --compilers js:babel-register --watch test",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "try": "DEBUG=test babel-node test"
   },
   "watch": {
     "babel": {
@@ -50,7 +51,7 @@
   },
   "dependencies": {
     "caller-id": "^0.1.0",
-    "debug": "^2.2.0",
+    "debug": "^2.6.8",
     "lodash.set": "^4.3.2",
     "lodash.transform": "^4.6.0",
     "metalsmith-move": "github:leviwheatcroft/metalsmith-move",
