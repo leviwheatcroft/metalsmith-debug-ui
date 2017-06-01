@@ -7,6 +7,7 @@ config/local.js
 npm-debug.log
 images
 
+.README.md
 lib
 test
 cache.json

@@ -15,7 +15,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm run babel && npm run client && npm run docs && cp docs/README.md.html docs/index.html && npm run gh-pages",
+    "build": "npm run babel && npm run client:prodn && npm run docs && cp docs/README.md.html docs/index.html && npm run gh-pages",
     "client": "cross-env DEBUG=metalsmith* babel-node build",
     "client:prodn": "cross-env DEBUG=metalsmith* NODE_ENV=production babel-node build",
     "readme": "node-readme",
@@ -28,8 +28,7 @@
     "test:watch": "cross-env NODE_ENV=test mocha --compilers js:babel-register --watch test",
     "version": "npm run build",
     "postversion": "git push && git push --tags",
-    "watch": "npm-watch",
-    "try": "DEBUG=test babel-node test"
+    "watch": "npm-watch"
   },
   "watch": {
     "babel": {
@@ -50,17 +49,11 @@
     }
   },
   "dependencies": {
-    "caller-id": "^0.1.0",
     "debug": "^2.6.8",
     "lodash.set": "^4.3.2",
     "lodash.transform": "^4.6.0",
-    "metalsmith-move": "github:leviwheatcroft/metalsmith-move",
-    "sha1": "^1.1.1",
-    "socket.io": "^1.7.3",
-    "st": "^1.2.0",
     "strip-ansi": "^3.0.1",
     "vow": "^0.4.14",
-    "vow-node": "^0.3.0",
     "wrap-fn": "^0.1.5"
   },
   "devDependencies": {
@@ -107,6 +100,7 @@
     "metalsmith-ignore": "^0.1.2",
     "metalsmith-in-place": "^2.0.1",
     "metalsmith-less": "^2.0.0",
+    "metalsmith-move": "github:leviwheatcroft/metalsmith-move",
     "mocha": "^3.1.2",
     "mocha-eslint": "^3.0.1",
     "nock": "^9.0.2",
