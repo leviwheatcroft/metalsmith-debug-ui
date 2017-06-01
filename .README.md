@@ -37,9 +37,9 @@ different times during the build process and stores this history. Then it
 injects a browser based client into your build output which allows you to view
 that history.
 
-### report on every plugin
-
-In this mode you need to patch your metalsmith instance with `debugUi.patch`.
+### patch mode
+This will report after every plugin. You need to patch your metalsmith instance
+with `debugUi.patch`.
 
 ```javascript
 import Metalsmith from 'metalsmith'
@@ -54,7 +54,10 @@ ms
 .build(...)
 ```
 
-### report at specific points
+In patch mode if a plugin throws an exception, no further plugins will be
+executed but debug-ui will still be written to your build directory.
+
+### report mode
 
 Just call `debugUi.report` as a plugin
 
@@ -74,6 +77,10 @@ ms
 .use(debug.report('stage 2'))
 .build(...)
 ```
+
+In report mode if a plugin throws an exception, metalsmith will just die as is
+normal behaviour. However, the last call to `debugUi.report` would have already
+written the debug ui to your build directory.
 
 ### viewing output
 
