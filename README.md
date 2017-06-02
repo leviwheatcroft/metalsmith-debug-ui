@@ -54,9 +54,6 @@ ms
 .build(...)
 ```
 
-In patch mode if a plugin throws an exception, no further plugins will be
-executed but debug-ui will still be written to your build directory.
-
 ### report mode
 
 Just call `debugUi.report` as a plugin
@@ -78,16 +75,30 @@ ms
 .build(...)
 ```
 
-In report mode if a plugin throws an exception, metalsmith will just die as is
-normal behaviour. However, the last call to `debugUi.report` would have already
-written the debug ui to your build directory.
-
 ### viewing output
 
 The client should be built with the rest of your site, and will be located at
 `debug-ui/index.html` in your build directory. You should use your favourite
 static development server to view it in the same way you would view anything
 else in your build directory.
+
+### errors during build
+
+In patch mode if a plugin throws an exception, no further plugins will be
+executed but debug-ui will still be written to your build directory.
+
+In report mode if a plugin throws an exception, metalsmith will just die (as is
+normal behaviour). However, the last call to `debugUi.report` would have already
+written the debug ui to your build directory.
+
+Because remaining plugins are not called in either mode, plugins like
+`metalsmith-dev-server` will not be called, so you won't be able to view
+the debug ui. I recommend implementing [browser-sync][browser-sync] instead.
+
+## demo
+
+see [metalsmith-all-the-things][metalsmith-all-the-things] for a full working
+demo.
 
 ## options
 
@@ -127,3 +138,5 @@ branch.
 [2]: https://github.com/leviwheatcroft/metalsmith-debug-ui "github repo"
 [files]: http://leviwheatcroft.github.io/metalsmith-debug-ui/images/files.png
 [log]: http://leviwheatcroft.github.io/metalsmith-debug-ui/images/log.png
+[browser-sync]: https://www.browsersync.io/
+[metalsmith-all-the-things]: https://github.com/leviwheatcroft/metalsmith-all-the-things
