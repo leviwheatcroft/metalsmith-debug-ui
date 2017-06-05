@@ -64,14 +64,12 @@ import debugUi from 'metalsmith-debug-ui'
 
 let ms = Metalsmith('src') // no need to patch
 
-debugUi.patch(ms)
-
 ms
 .use(myFirstPlugin({...}))
 .use(mySecondPlugin({...}))
-.use(debug.report('stage 1'))
+.use(debugUi.report('stage 1'))
 .use(myFirstPlugin({...}))
-.use(debug.report('stage 2'))
+.use(debugUi.report('stage 2'))
 .build(...)
 ```
 
@@ -94,6 +92,26 @@ written the debug ui to your build directory.
 Because remaining plugins are not called in either mode, plugins like
 `metalsmith-dev-server` will not be called, so you won't be able to view
 the debug ui. I recommend implementing [browser-sync][browser-sync] instead.
+
+### anonymous plugins
+
+The only way debug-ui can identify a plugin is to read the name of the function
+returned by that plugin, but most plugins return anonymous functions. There's
+a number of ways you can reduce this problem.
+
+__ metalsmith-sugar __
+[metalsmith-sugar][metalsmith-sugar] allows for a different syntax for your
+build process, and also provides named functions as plugins. It completely
+solves this problem if you use the alternative syntax.
+
+__ debugUI.report __
+even if you're using patch mode, you can still slip in a few `debugUi.report`
+calls, which will create markers in your list of plugins.
+
+__ fix the plugin __
+If you're a plugin maintainer, please look into returning a named function
+instead of an anonymous one. If you submit a PR somewhere, mention it in
+[this issue][anonymous vs named plugins]
 
 ## demo
 
@@ -140,3 +158,5 @@ branch.
 [log]: http://leviwheatcroft.github.io/metalsmith-debug-ui/images/log.png
 [browser-sync]: https://www.browsersync.io/
 [metalsmith-all-the-things]: https://github.com/leviwheatcroft/metalsmith-all-the-things
+[anonymous vs named plugins]: https://github.com/leviwheatcroft/metalsmith-debug-ui/issues/2
+[metalsmith-sugar]: https://github.com/connected-world-services/metalsmith-sugar
