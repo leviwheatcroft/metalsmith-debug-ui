@@ -15,9 +15,8 @@ Features:
  * cool react based client
 
 ![files interface][files]
-![log interface][log]
 
-See the [annotated source][1] or [github repo][2]
+See the [annotated source][annotated source] or [github repo][github repo]
 
 ## install
 
@@ -108,10 +107,9 @@ branch.
 ## License
 **MIT** : http://opensource.org/licenses/MIT
 
-[1]: https://leviwheatcroft.github.io/metalsmith-debug-ui "annotated source"
-[2]: https://github.com/leviwheatcroft/metalsmith-debug-ui "github repo"
+[annotated source]: https://leviwheatcroft.github.io/metalsmith-debug-ui "annotated source"
+[github repo]: https://github.com/leviwheatcroft/metalsmith-debug-ui "github repo"
 [files]: http://leviwheatcroft.github.io/metalsmith-debug-ui/images/files.png
-[log]: http://leviwheatcroft.github.io/metalsmith-debug-ui/images/log.png
 [browser-sync]: https://www.browsersync.io/
 [metalsmith-all-the-things]: https://github.com/leviwheatcroft/metalsmith-all-the-things
 [anonymous vs named plugins]: https://github.com/leviwheatcroft/metalsmith-debug-ui/issues/2
