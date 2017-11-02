@@ -6,6 +6,9 @@ import PropTypes from 'prop-types'
 import Table from 'react-filterable-table'
 import LogWarning from './LogWarning'
 
+
+import styles from 'react-filterable-table/dist/style.css'
+
 export default class Log extends Component {
   render () {
     let table

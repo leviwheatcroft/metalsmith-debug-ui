@@ -16,7 +16,7 @@ const config = {
     alias: {}
   },
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.(js|jsx)$/,
         include: [
@@ -34,6 +34,13 @@ const config = {
             ]
           }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
+        ]
       }
     ]
   },
