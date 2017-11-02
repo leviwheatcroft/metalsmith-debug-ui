@@ -3,9 +3,10 @@ const path = require('path')
 const baseDir = __dirname
 const prodn = process.env.NODE_ENV === 'production'
 console.log(`webpack ${prodn ? 'production' : 'development'} build`)
+process.traceDeprecation = true
 
 const config = {
-  devtool: prodn ? 'eval' : 'source-map',
+  devtool: 'source-map',
   entry: path.resolve(baseDir, 'lib', 'client', 'client.js'),
   output: {
     path: path.resolve(baseDir, 'dist', 'client'),
@@ -15,6 +16,17 @@ const config = {
     extensions: ['.js', '.jsx'],
     alias: {}
   },
+  plugins: [
+    // prodn ? new webpack.ProvidePlugin({
+    //   React: 'react' // doesn't work
+    // }) : false,
+    prodn ? new webpack.optimize.UglifyJsPlugin({
+      sourceMap: !prodn,
+      compressor: {
+        warnings: false
+      }
+    }) : false
+  ].filter((e) => e),
   module: {
     loaders: [
       {
@@ -43,13 +55,7 @@ const config = {
         ]
       }
     ]
-  },
-  plugins: [
-    // prodn ? new webpack.ProvidePlugin({
-    //   React: 'react' // doesn't work
-    // }) : false,
-    prodn ? new webpack.optimize.UglifyJsPlugin() : false
-  ].filter((e) => (e))
+  }
 }
 
 module.exports = config
