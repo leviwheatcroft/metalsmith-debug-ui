@@ -2,18 +2,11 @@
 
 ![nodei.co](https://nodei.co/npm/metalsmith-debug-ui.png?downloads=true&downloadRank=true&stars=true)
 
-![npm](https://img.shields.io/npm/v/metalsmith-debug-ui.svg)
-
-![github-issues](https://img.shields.io/github/issues/leviwheatcroft/metalsmith-debug-ui.svg)
-
-![stars](https://img.shields.io/github/stars/leviwheatcroft/metalsmith-debug-ui.svg)
-
-![forks](https://img.shields.io/github/forks/leviwheatcroft/metalsmith-debug-ui.svg)
+![npm](https://img.shields.io/npm/v/metalsmith-debug-ui.svg) ![github-issues](https://img.shields.io/github/issues/leviwheatcroft/metalsmith-debug-ui.svg) ![stars](https://img.shields.io/github/stars/leviwheatcroft/metalsmith-debug-ui.svg) ![forks](https://img.shields.io/github/forks/leviwheatcroft/metalsmith-debug-ui.svg)
 
 Browser based debug interface for [metalsmith](https://metalsmith.io)
 
-Provides nice ui to navigate metalsmith files and metadata, allowing you to
-view any stage of the build process
+Provides nice ui to navigate metalsmith files and metadata, allowing you to view any stage of the build process
 
 Features:
 
@@ -31,23 +24,21 @@ See the [annotated source][1] or [github repo][2]
 `npm i --save metalsmith-debug-ui`
 
 ## usage
-
 `metalsmith-debug-ui` clones your metalsmith files and metadata strutures at
 different times during the build process and stores this history. Then it
 injects a browser based client into your build output which allows you to view
 that history.
 
 ### patch mode
-This will report after every plugin. You need to patch your metalsmith instance
-with `debugUi.patch`.
+This will report after every plugin. You need to patch your metalsmith instance.
 
 ```javascript
 import Metalsmith from 'metalsmith'
-import debugUi from 'metalsmith-debug-ui'
+import { patch } from 'metalsmith-debug-ui'
 
 let ms = Metalsmith('src')
 
-debugUi.patch(ms)
+patch(ms)
 
 ms
 .use(...)
@@ -56,101 +47,66 @@ ms
 
 ### report mode
 
-Just call `debugUi.report` as a plugin
+Just call `report` as a plugin
 
 ```javascript
 import Metalsmith from 'metalsmith'
-import debugUi from 'metalsmith-debug-ui'
+import { report } from 'metalsmith-debug-ui'
 
 let ms = Metalsmith('src') // no need to patch
 
 ms
 .use(myFirstPlugin({...}))
 .use(mySecondPlugin({...}))
-.use(debugUi.report('stage 1'))
+.use(report('stage 1'))
 .use(myFirstPlugin({...}))
-.use(debugUi.report('stage 2'))
+.use(report('stage 2'))
 .build(...)
 ```
 
 ### viewing output
-
-The client should be built with the rest of your site, and will be located at
-`debug-ui/index.html` in your build directory. You should use your favourite
-static development server to view it in the same way you would view anything
-else in your build directory.
+The client should be built with the rest of your site, and will be located at `debug-ui/index.html` in your build directory. You should use your favourite static development server to view it in the same way you would view anything else in your build directory.
 
 ### errors during build
+When a plugin throws an error metalsmith will just die as per normal behaviour, but the data debug-ui has collected will still be written to the build dir.
 
-In patch mode if a plugin throws an exception, no further plugins will be
-executed but debug-ui will still be written to your build directory.
-
-In report mode if a plugin throws an exception, metalsmith will just die (as is
-normal behaviour). However, the last call to `debugUi.report` would have already
-written the debug ui to your build directory.
-
-Because remaining plugins are not called in either mode, plugins like
-`metalsmith-dev-server` will not be called, so you won't be able to view
-the debug ui. I recommend implementing [browser-sync][browser-sync] instead.
+The only problem is that if you're using a dev server like `metalsmith-dev-server` you won't be able to view the ui to see what went wrong. I recommend implementing [browser-sync][browser-sync] or something instead.
 
 ### anonymous plugins
+It's difficult to reliably detect the names of plugins in order to report them in the ui. debug-ui first tries to sniff the plugin name from a stack trace, if that fails it checks whether the plugin returns a named function, and if that fails it will simply list the plugin as `anonymous`.
 
-The only way debug-ui can identify a plugin is to read the name of the function
-returned by that plugin, but most plugins return anonymous functions. There's
-a number of ways you can reduce this problem.
-
-__ metalsmith-sugar __
-[metalsmith-sugar][metalsmith-sugar] allows for a different syntax for your
-build process, and also provides named functions as plugins. It completely
-solves this problem if you use the alternative syntax.
-
-__ debugUI.report __
-even if you're using patch mode, you can still slip in a few `debugUi.report`
-calls, which will create markers in your list of plugins.
-
-__ fix the plugin __
-If you're a plugin maintainer, please look into returning a named function
-instead of an anonymous one. If you submit a PR somewhere, mention it in
-[this issue][anonymous vs named plugins]
+In most cases this is satisfactory. If something is reported as anonymous you can easily work out what it is by looking at the plugins before and after it.
 
 ## demo
-
 see [metalsmith-all-the-things][metalsmith-all-the-things] for a full working
 demo.
 
 ## options
-
 nil
 
 ## plugin compatibility
-
 Some plugins may not write to the `debug-ui` log, although I haven't found any
 yet. In theory any plugins using `debug v2.x.x` should work. If you find one
 please post an issue.
 
 ## testing
-
 nil.
 
 ## building
-
 Deprecation warning re: parseQuery is from upstream package. Don't worry about
 it.
 
 `npm run watch`
 
 ## Author
-
 Levi Wheatcroft <levi@wht.cr>
 
 ## Contributing
-
 Contributions welcome; Please submit all pull requests against the master
 branch.
 
 ## License
-
- - **MIT** : http://opensource.org/licenses/MIT
+**MIT** : http://opensource.org/licenses/MIT
 
 [1]: https://leviwheatcroft.github.io/metalsmith-debug-ui "annotated source"
 [2]: https://github.com/leviwheatcroft/metalsmith-debug-ui "github repo"
