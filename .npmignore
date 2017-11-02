@@ -10,4 +10,4 @@ images
 .README.md
 lib
 test
-cache.json
+cache
