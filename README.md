@@ -84,9 +84,21 @@ demo.
 nil
 
 ## plugin compatibility
-Some plugins may not write to the `debug-ui` log, although I haven't found any
-yet. In theory any plugins using `debug v2.x.x` should work. If you find one
-please post an issue.
+
+__logging__
+Some plugins may not write to the `debug-ui` log, although I haven't found any yet. In theory any plugins using `debug v2.x.x` should work. If you find one please post an issue.
+
+__managed ms build fn__
+some plugins wrap the build fn so they can run it any time the fs changes (like `metalsmith-watch`, `metalsmith-browser-sync`, et cetera). You're better off doing this with npm scripts, but if you must use these plugins then you'll need to clear debug-ui's data each time the build starts with a call to the `clear` function, something like this:
+
+```javascript
+import { clear } from 'metalsmith-debug-ui'
+
+metalsmith
+.use(() => debugUi.clear())
+// ...
+.build()
+```
 
 ## testing
 nil.
