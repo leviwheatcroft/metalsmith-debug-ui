@@ -63,6 +63,9 @@ ms
 .build(...)
 ```
 
+### metalsmith CLI / metalsmith.json
+This plugin won't work in metalsmith CLI mode.
+
 ### viewing output
 The client should be built with the rest of your site, and will be located at `debug-ui/index.html` in your build directory. You should use your favourite static development server to view it in the same way you would view anything else in your build directory.
 
