@@ -4,7 +4,7 @@
   "description": "A metalsmith plugin for retrieving data from the cloudinary api.",
   "repository": "git://github.com/leviwheatcroft/metalsmith-debug-ui.git",
   "homepage": "http://leviwheatcroft.github.io/metalsmith-debug-ui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "keywords": [
     "metalsmith",
     "debug"
