@@ -4,7 +4,6 @@ import less from 'metalsmith-less'
 import ignore from 'metalsmith-ignore'
 import inPlace from 'metalsmith-in-place'
 import webpack from 'metalsmith-webpack-2'
-import move from 'metalsmith-move'
 
 const dbg = debug('metalsmith-debug-ui')
 
@@ -16,13 +15,11 @@ Metalsmith('./')
 .source('lib/client')
 .destination('dist/client')
 .use(webpack())
-.use(move({
-  '**/*.jsx': false
-}))
 .use(less({
   pattern: 'styles.less'
 }))
 .use(ignore([
+  '**/*.jsx',
   'styles.less'
 ]))
 .use(inPlace())
