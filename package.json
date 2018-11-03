@@ -1,7 +1,7 @@
 {
   "name": "metalsmith-debug-ui",
   "author": "Levi Wheatcroft <levi@wheatcrofts.com.au> (http://leviwheatcroft.com)",
-  "description": "A metalsmith plugin for retrieving data from the cloudinary api.",
+  "description": "A metalsmith plugin providing ui to navigate files and meta during build",
   "repository": "git://github.com/leviwheatcroft/metalsmith-debug-ui.git",
   "homepage": "http://leviwheatcroft.github.io/metalsmith-debug-ui",
   "version": "0.3.2",
