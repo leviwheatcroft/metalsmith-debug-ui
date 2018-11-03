@@ -56,7 +56,6 @@
 <span class="hljs-keyword">import</span> ignore <span class="hljs-keyword">from</span> <span class="hljs-string">'metalsmith-ignore'</span>
 <span class="hljs-keyword">import</span> inPlace <span class="hljs-keyword">from</span> <span class="hljs-string">'metalsmith-in-place'</span>
 <span class="hljs-keyword">import</span> webpack <span class="hljs-keyword">from</span> <span class="hljs-string">'metalsmith-webpack-2'</span>
-<span class="hljs-keyword">import</span> move <span class="hljs-keyword">from</span> <span class="hljs-string">'metalsmith-move'</span>
 
 <span class="hljs-keyword">const</span> dbg = debug(<span class="hljs-string">'metalsmith-debug-ui'</span>)
 
@@ -86,13 +85,11 @@ Metalsmith build
 .source(<span class="hljs-string">'lib/client'</span>)
 .destination(<span class="hljs-string">'dist/client'</span>)
 .use(webpack())
-.use(move({
-  <span class="hljs-string">'**/*.jsx'</span>: <span class="hljs-literal">false</span>
-}))
 .use(less({
   <span class="hljs-attr">pattern</span>: <span class="hljs-string">'styles.less'</span>
 }))
 .use(ignore([
+  <span class="hljs-string">'**/*.jsx'</span>,
   <span class="hljs-string">'styles.less'</span>
 ]))
 .use(inPlace())

@@ -443,7 +443,8 @@ this also traps exceptions</p>
   <a class="pilcrow" href="#section-16" id="section-16"></a>
 </div>
 <p>we need to try to sniff the plugin name here, because it's likely
-in the stack</p>
+in the stack
+console.log(new Error().stack)</p>
 
         </td>
         <td class="code highlight">
@@ -461,7 +462,7 @@ in the stack</p>
 
         </td>
         <td class="code highlight">
-          <pre class="javascript">          <span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\/metalsmith-((?!debug-ui).*?)\//</span>
+          <pre class="javascript">          <span class="hljs-keyword">let</span> regex = <span class="hljs-regexp">/\/metalsmith-((?!debug-ui)[\w-]*)[/.](?!.*metalsmith-)/m</span>
 </pre>
         </td>
       </tr>
