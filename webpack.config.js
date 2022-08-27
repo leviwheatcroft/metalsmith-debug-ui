@@ -1,5 +1,7 @@
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+
 const {
   join,
   dirname
@@ -13,7 +15,7 @@ const config = {
   mode: prodn ? 'production' : 'development',
   entry: join(__dirname, 'lib/client/client.js'),
   output: {
-    path: join(__dirname, 'dist/client'),
+    path: join(__dirname, 'dist'),
     filename: 'client.js'
   },
   cache: {
@@ -63,7 +65,13 @@ const config = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '[name].css' })
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new CopyPlugin({
+      patterns: [
+        'lib/client/index.html',
+        'lib/index.js'
+      ]
+    })
   ],
   optimization: {
     ...prodn
