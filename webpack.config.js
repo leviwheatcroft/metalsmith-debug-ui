@@ -1,40 +1,39 @@
-const webpack = require('webpack')
-const path = require('path')
-const baseDir = __dirname
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const {
+  join,
+  dirname
+} = require('path')
+
 const prodn = process.env.NODE_ENV === 'production'
-console.log(`webpack ${prodn ? 'production' : 'development'} build`)
-process.traceDeprecation = true
 
 const config = {
-  devtool: 'source-map',
-  entry: path.resolve(baseDir, 'lib', 'client', 'client.js'),
+  // profile: true,
+  // stats: 'detailed',
+  mode: prodn ? 'production' : 'development',
+  entry: join(__dirname, 'lib/client/client.js'),
   output: {
-    path: path.resolve(baseDir, 'dist', 'client'),
+    path: join(__dirname, 'dist/client'),
     filename: 'client.js'
+  },
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename]
+    }
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {}
   },
-  plugins: [
-    // prodn ? new webpack.ProvidePlugin({
-    //   React: 'react' // doesn't work
-    // }) : false,
-    prodn ? new webpack.optimize.UglifyJsPlugin({
-      sourceMap: !prodn,
-      compressor: {
-        warnings: false
-      }
-    }) : false
-  ].filter((e) => e),
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         include: [
-          path.resolve(baseDir, 'lib'),
-          path.resolve(baseDir, 'lib', 'client'),
-          path.resolve(baseDir, 'lib', 'client', 'Components')
+          join(__dirname, 'lib'),
+          join(__dirname, 'lib/client'),
+          join(__dirname, 'lib/client/Components')
         ],
         exclude: /node_modules/,
         use: {
@@ -48,13 +47,33 @@ const config = {
         }
       },
       {
-        test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' }
+        test: /\.css$/i,
+        use: (info) => [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            // required when Rule.use is a function
+            ident: 'css-loader',
+            options: {
+              url: false
+            }
+          }
         ]
       }
     ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({ filename: '[name].css' })
+  ],
+  optimization: {
+    ...prodn
+      ? {
+          minimizer: [
+            '...',
+            new CssMinimizerPlugin()
+          ]
+        }
+      : {}
   }
 }
 
