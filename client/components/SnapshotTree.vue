@@ -24,12 +24,12 @@
     )
 </template>
 <script>
-const { default: TreeItemString } = require('../TreeItemString')
-const { default: TreeItemNumber } = require('../TreeItemNumber')
-const { default: TreeItemArray } = require('../TreeItemArray')
-const { default: TreeItemObject } = require('../TreeItemObject')
-const { default: TreeItemOther } = require('../TreeItemOther')
-const { default: TreeItemCopy } = require('../TreeItemCopy')
+const { default: TreeItemString } = require('./TreeItemString')
+const { default: TreeItemNumber } = require('./TreeItemNumber')
+const { default: TreeItemArray } = require('./TreeItemArray')
+const { default: TreeItemObject } = require('./TreeItemObject')
+const { default: TreeItemOther } = require('./TreeItemOther')
+const { default: TreeItemCopy } = require('./TreeItemCopy')
 
 const SnapshotTree = {
   data () {
