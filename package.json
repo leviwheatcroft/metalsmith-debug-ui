@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-debug-ui",
-  "author": "Levi Wheatcroft <levi@wheatcrofts.com.au> (http://leviwheatcroft.com)",
+  "author": "Levi Wheatcroft <levi@wheatcroft.com.au> (http://leviwheatcroft.com)",
   "description": "A metalsmith plugin providing ui to navigate files and meta during build",
   "repository": "git://github.com/leviwheatcroft/metalsmith-debug-ui.git",
   "homepage": "http://leviwheatcroft.github.io/metalsmith-debug-ui",
@@ -13,151 +13,41 @@
     "url": "https://github.com/leviwheatcroft/metalsmith-debug-ui/issues"
   },
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
-    "build": "npm run babel && npm run client:prodn && npm run docs && cp docs/README.md.html docs/index.html && npm run gh-pages",
-    "client": "cross-env DEBUG=metalsmith* babel-node build",
-    "client:prodn": "cross-env DEBUG=metalsmith* NODE_ENV=production babel-node build",
-    "readme": "node-readme",
-    "babel": "cross-env NODE_ENV=node6 babel lib -d dist --ignore client",
-    "babel:watch": "cross-env NODE_ENV=node6 babel lib --watch -d dist --ignore client",
-    "docs": "npm run readme && rm -fr ./docs/* && docker -o ./docs -I -x dist,.README.md,test/fixtures,node_modules,docs,.store,config && cp --parents images/* docs",
-    "gh-pages": "gh-pages -d docs",
-    "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --check-coverage --lines 100 npm run test",
-    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register test",
-    "test:watch": "cross-env NODE_ENV=test mocha --compilers js:babel-register --watch test",
-    "version": "npm run build",
-    "postversion": "git push && git push --tags",
-    "watch": "npm-watch",
-    "webpack": "webpack -c webpack.config.js"
-  },
-  "watch": {
-    "babel": {
-      "patterns": [
-        "lib"
-      ],
-      "ignore": [
-        "lib/client",
-        "lib/build.js"
-      ]
-    },
-    "client": {
-      "patterns": [
-        "lib/client",
-        "dist/build.js"
-      ],
-      "extensions": "js,jsx,html,less"
-    }
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "webpack": "webpack --watch --config webpack.config.js",
+    "browsersync": "node browsersync"
   },
   "dependencies": {
-    "debug": "^2.6.8",
-    "lodash.set": "^4.3.2",
-    "lodash.transform": "^4.6.0",
-    "strip-ansi": "^3.0.1",
-    "vow": "^0.4.14",
-    "wrap-fn": "^0.1.5"
+    "lodash": "^4.17.21",
+    "strip-ansi": "^6.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^7.0.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-istanbul": "^2.0.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.16.0",
-    "babel-register": "^6.16.3",
-    "bootstrap": "^3.3.7",
-    "bootstrap-webpack": "0.0.6",
-    "browser-request": "^0.3.3",
-    "chai": "^3.5.0",
-    "concurrently": "^3.4.0",
-    "config": "^1.24.0",
+    "autoprefixer": "^10.4.8",
+    "browser-sync": "^2.27.10",
     "copy-webpack-plugin": "^11.0.0",
-    "cross-env": "^3.1.3",
-    "css-loader": "^0.28.0",
+    "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
-    "docker": "^1.0.0",
-    "eslint": "^8.16.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint": "^8.23.0",
+    "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
     "eslint-plugin-node": "^11.1.0",
-    "exports-loader": "^0.6.4",
-    "extract-text-webpack-plugin": "^2.1.0",
-    "file-loader": "^0.11.1",
-    "gh-pages": "^0.12.0",
-    "hjson": "^2.4.1",
-    "immutability-helper": "^2.2.2",
-    "imports-loader": "^0.7.1",
-    "jquery": "^3.2.1",
-    "jsonview": "^1.2.0",
-    "jstransformer": "^1.0.0",
-    "jstransformer-pug": "^0.2.3",
-    "less-loader": "^4.0.3",
-    "metalsmith": "^2.3.0",
-    "metalsmith-ignore": "^1.0.0",
-    "metalsmith-in-place": "^2.0.1",
-    "metalsmith-less": "^2.0.0",
-    "metalsmith-webpack-2": "^1.0.5",
+    "eslint-plugin-promise": "^6.0.1",
+    "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
-    "mocha": "^5.2.0",
-    "mocha-eslint": "^3.0.1",
-    "nock": "^9.0.2",
-    "node-readme": "^0.1.9",
-    "node-resemble-js": "^0.1.1",
-    "npm-watch": "^0.1.8",
-    "nyc": "^13.1.0",
-    "react": "^15.5.4",
-    "react-bootstrap": "^0.30.8",
-    "react-cookie": "^1.0.5",
-    "react-dom": "^15.5.4",
-    "react-filterable-table": "^0.3.0",
-    "react-json-tree": "^0.10.7",
-    "sinon": "^1.17.7",
-    "socket.io-client": "^2.1.1",
-    "style-loader": "^0.16.1",
-    "url-loader": "^1.1.2",
+    "postcss": "^8.4.16",
+    "postcss-loader": "^7.0.1",
+    "postcss-preset-env": "^7.8.0",
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
+    "tailwindcss": "^3.1.8",
+    "vue": "2.7.0",
+    "vue-loader": "15.10.0",
     "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
-  },
-  "eslintConfig": {
-    "rules": {
-      "react/jsx-uses-vars": [
-        2
-      ]
-    },
-    "parser": "babel-eslint",
-    "extends": "standard",
-    "installedESLint": true,
-    "plugins": [
-      "standard",
-      "babel",
-      "react"
-    ],
-    "env": {
-      "node": true,
-      "mocha": true
-    }
-  },
-  "babel": {
-    "presets": [
-      "stage-0",
-      "es2015"
-    ]
-  },
-  "nyc": {
-    "include": [
-      "lib/**/*.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
-    "sourceMap": false,
-    "instrument": false
-  },
-  "directories": {
-    "test": "test"
+    "webpack-bundle-size-analyzer": "^3.1.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-merge": "^5.8.0"
   }
 }
