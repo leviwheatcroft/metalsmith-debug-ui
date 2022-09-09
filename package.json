@@ -13,7 +13,11 @@
     "url": "https://github.com/leviwheatcroft/metalsmith-debug-ui/issues"
   },
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./patch": "./lib/patch.js"
+  },
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.js",
     "webpack": "webpack --watch --config webpack.config.js",
@@ -49,5 +53,8 @@
     "webpack-bundle-size-analyzer": "^3.1.0",
     "webpack-cli": "^4.10.0",
     "webpack-merge": "^5.8.0"
+  },
+  "peerDependencies": {
+    "metalsmith": "^2.5.0"
   }
 }
