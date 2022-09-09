@@ -1,0 +1,66 @@
+  [38;5;204;1m@metalsmith/collections [0mIdentified 1 collections: posts [38;5;204m+0ms[0m
+  [38;5;204;1m@metalsmith/collections [0mProcessing collection posts with options {
+  name: 'posts',
+  pattern: 'posts/*.md',
+  reverse: false,
+  metadata: null,
+  limit: Infinity,
+  refer: true,
+  sortBy: [Function: defaultSort],
+  filterBy: [Function: defaultFilter]
+}: [38;5;204m+1ms[0m
+  [38;5;204;1m@metalsmith/collections [0mAdded 4 files to collection posts [38;5;204m+3ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mchecking file: about.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mconverting file: about.md [38;5;148m+1ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mchecking file: css/style.css [38;5;148m+12ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mchecking file: index.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mconverting file: index.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mchecking file: posts/first-post.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mconverting file: posts/first-post.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mchecking file: posts/fourth-post.md [38;5;148m+1ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mconverting file: posts/fourth-post.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mchecking file: posts/second-post.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mconverting file: posts/second-post.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mchecking file: posts/third-post.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mconverting file: posts/third-post.md [38;5;148m+0ms[0m
+  [38;5;148;1m@metalsmith/markdown [0mchecking file: debug-ui/build.log [38;5;148m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mchecking file: css/style.css [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mchecking file: debug-ui/build.log [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mchecking file: about.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mapplying pattern: null to file: about.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mchecking file: index.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mapplying pattern: null to file: index.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mchecking file: posts/first-post.html [38;5;173m+1ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mapplying pattern: null to file: posts/first-post.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mchecking file: posts/fourth-post.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mapplying pattern: null to file: posts/fourth-post.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mchecking file: posts/second-post.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mapplying pattern: null to file: posts/second-post.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mchecking file: posts/third-post.html [38;5;173m+0ms[0m
+  [38;5;173;1m@metalsmith/permalinks [0mapplying pattern: null to file: posts/third-post.html [38;5;173m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating about/css/style.css [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidation failed, about/css/style.css does not have a layout set [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating about/debug-ui/build.log [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidation failed, about/debug-ui/build.log does not have a layout set [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating about/index.html [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating css/style.css [38;5;98m+18ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidation failed, css/style.css does not have a layout set [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating debug-ui/build.log [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidation failed, debug-ui/build.log does not have a layout set [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating index.html [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating posts/first-post/index.html [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating posts/fourth-post/index.html [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating posts/second-post/index.html [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mvalidating posts/third-post/index.html [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mrendering about/index.html with layout layout.hbs [38;5;98m+1ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mrendering index.html with layout layout.hbs [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mrendering posts/first-post/index.html with layout post.hbs [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mrendering posts/fourth-post/index.html with layout post.hbs [38;5;98m+1ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mrendering posts/second-post/index.html with layout post.hbs [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mrendering posts/third-post/index.html with layout post.hbs [38;5;98m+0ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mdone rendering about/index.html [38;5;98m+15ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mdone rendering posts/first-post/index.html [38;5;98m+12ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mdone rendering posts/fourth-post/index.html [38;5;98m+2ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mdone rendering posts/second-post/index.html [38;5;98m+2ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mdone rendering index.html [38;5;98m+5ms[0m
+  [38;5;98;1m@metalsmith/layouts [0mdone rendering posts/third-post/index.html [38;5;98m+2ms[0m
