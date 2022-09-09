@@ -91,10 +91,16 @@ module.exports = {
         },
         ...prodn
           ? []
-          : [{
-              from: 'client/assets/snapshots.json',
-              to: './'
-            }]
+          : [
+              {
+                from: 'client/assets/snapshots.json',
+                to: './'
+              },
+              {
+                from: 'client/assets/build.log',
+                to: './'
+              }
+            ]
       ]
     }),
     new VueLoaderPlugin(),
