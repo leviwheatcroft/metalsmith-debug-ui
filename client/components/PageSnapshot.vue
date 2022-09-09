@@ -6,12 +6,8 @@
   .body(
     class="flex flex-row gap-4 container items-start mx-auto mt-8"
   )
-    .loading(
-      v-if="!plugins.length"
-    )
     .snapshot-list(
       class="w-52 mr-8"
-      v-if="plugins.length"
     )
       h1(
         class="text-2xl"
@@ -20,14 +16,13 @@
         li.snapshot-list-item(
           :class="{'bg-slate-300': state.selectedSnapshot === idx }"
           class="p-4 cursor-pointer"
-          v-for="(snapshot, idx) in plugins"
+          v-for="(snapshot, idx) in snapshots"
           :key="idx"
           @click="setState('selectedSnapshot', idx)"
         ) {{ snapshot.fnName }}
     SnapshotTree(
       class="flex-grow"
-      v-if="plugins.length"
-      :snapshot="plugins[state.selectedSnapshot]"
+      :snapshot="snapshots[state.selectedSnapshot]"
       :selectedSnapshot="state.selectedSnapshot"
     )
   .spacer(
@@ -56,7 +51,7 @@ const PageSnapshot = {
     setState
   },
   props: {
-    plugins: {
+    snapshots: {
       required: true,
       type: Array
     }

@@ -2,11 +2,11 @@
 #app
   PageSnapshot(
     v-if="state.page === 'snapshots'",
-    :plugins="snapshots.plugins"
+    :snapshots="snapshots"
   )
   PageLogs(
     v-if="state.page === 'logs'"
-    :logItems="snapshots.log"
+    :log="log"
   )
 
 </template>
@@ -23,17 +23,36 @@ const App = {
   data () {
     return {
       state,
-      snapshots: {
-        log: [],
-        plugins: []
-      }
+      log: '',
+      snapshots: [{}]
     }
   },
-  async mounted () {
-    const response = await fetch('/debug-ui/snapshots.json')
-    const snapshots = await response.json()
-    console.log(snapshots)
-    this.snapshots = snapshots
+  mounted () {
+    const app = this
+    fetch('/debug-ui/snapshots.json')
+      .then((res) => {
+        res.json()
+          .then((snapshots) => {
+            console.log(snapshots)
+            app.snapshots = snapshots.snapshots
+          })
+      })
+      .catch((err) => {
+        console.error('Unable to fetch snapshots.')
+        console.error(err)
+        throw err
+      })
+    fetch('/debug-ui/build.log')
+      .then((res) => {
+          res.text()
+            .then((log) => {
+              console.log(log)
+              app.log = log
+            })
+        })
+        .catch((err) => {
+          console.warn('build.log not available')
+        })
   },
 }
 

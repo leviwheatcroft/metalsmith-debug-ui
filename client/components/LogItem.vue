@@ -2,18 +2,16 @@
 tr.log-item(
   class="hover:bg-slate-100"
 )
-  td.timestamp(
-    class="text-slate-400"
-  ) {{ timestamp }}
   td.elapsed(
-    class="text-right text-green-400"
+    class="align-top px-2 text-right text-green-400"
   ) {{ elapsed }}
   td.plugin(
-    class="text-blue-400"
+    class="align-top px-2 text-blue-400"
   ) {{ plugin.replace(/^@metalsmith\//, '@ms/') }}
   td.message(
-    class="text-slate-800"
-  ) {{ message }}
+    class="px-2 text-slate-800"
+  )
+    pre {{ message }}
 
 </template>
 <script>
@@ -23,10 +21,6 @@ const LogItem = {
   },
   methods: {},
   props: {
-    timestamp: {
-      required: true,
-      type: String
-    },
     elapsed: {
       required: true,
       type: String

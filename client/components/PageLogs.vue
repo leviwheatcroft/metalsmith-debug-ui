@@ -19,12 +19,9 @@
         v-model="filter"
       )
     table.log-items(
-      class="border-separate border-spacing-x-2 my-8"
+      class="mx-auto my-8"
     )
       tr
-        th(
-          class="border-b-2 border-slate-400"
-        ) Stamp
         th(
           class="border-b-2 border-slate-400"
         ) Dur.
@@ -35,12 +32,11 @@
           class="p-l-8 border-b-2 border-slate-400"
         ) Message
       LogItem(
-        v-for="({ elapsed, plugin, message, timestamp }, idx)  in filteredLogItems"
+        v-for="({ elapsed, plugin, message, timestamp }, idx)  in logItems"
         :key="idx"
         :elapsed="elapsed"
         :plugin="plugin"
         :message="message"
-        :timestamp="timestamp"
       )
   .spacer(
     class="flex-grow"
@@ -60,10 +56,35 @@ const PageLogs = {
     LogItem
   },
   computed: {
-    filteredLogItems () {
-      if (!this.filter) return this.logItems
-      const re = new RegExp(this.filter)
-      return this.logItems.filter(({ message, plugin }) => re.test(message + plugin))
+    chunks () {
+      const ansiEscapeRe = /\u001B\[\d{1,3};\d{1,3};\d{1,3}(?:;\d{1,3})?m|\u001B\[0m/
+      return this.log
+        .split(ansiEscapeRe)
+        .filter((i) => /\S/.test(i))
+        .map((i) => i.trim())
+    },
+    logItems () {
+      const logItems = []
+      const chunks = this.chunks
+      for (let i = 0; i < chunks.length; i += 3) {
+        const plugin = chunks[i]
+        const message = chunks[i + 1]
+        const elapsed = chunks[i + 2]
+        if (this.filter) {
+          const filterRe = new RegExp(this.filter)
+          if (
+            !filterRe.test(plugin) &&
+            !filterRe.test(message)
+          ) continue
+        }
+        logItems.push({
+          plugin,
+          message,
+          elapsed
+        })
+      }
+
+      return logItems
     }
   },
   data () {
@@ -74,9 +95,9 @@ const PageLogs = {
   },
   methods: {},
   props: {
-    logItems: {
+    log: {
       required: true,
-      type: Array
+      type: String
     }
   }
 }

@@ -1,6 +1,6 @@
 <template lang="pug">
 .tree-item-other(
-  class="hover:bg-slate-100"
+  class="hover:bg-slate-100 whitespace-nowrap"
 )
   Indent(
     :depth="depth"
