@@ -52,24 +52,6 @@ A client to view snapshots and logs will be written to `/debug-ui` in your build
 
 If you're using `browser-sync` or similar to serve your project at `http://localhost:3000` then the url will be `http://localhost:3000/debug-ui/index.html`.
 
-## patching metalsmith
-As an alternative to taking arbitrary snapshots, you can patch the metalsmith instance to take a snapshot after every plugin.
-
-```javascript
-import Metalsmith from 'metalsmith'
-import debugUiPatch from 'metalsmith-debug-ui/patch'
-
-const metalsmith = Metalsmith('src')
-
-const debugUiMetalsmith = debugUiPatch(metalsmith)
-
-debugUiMetalsmith
-  .use(myFirstPlugin({...}))
-  .use(mySecondPlugin({...}))
-  .use(myThirdPlugin({...}))
-  .build(...)
-```
-
 ## compatibility
 
 `metalsmith@2.5.0` and newer is not compatible with `metalsmith-debug-ui@0.3.3`, upgrade
