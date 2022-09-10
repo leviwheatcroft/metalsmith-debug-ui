@@ -1,15 +1,15 @@
 <template lang="pug">
 .tree-item-other(
-  class="hover:bg-slate-100 whitespace-nowrap"
+  class="hover:bg-slate-100 flex flex-row"
 )
   Indent(
     :depth="depth"
   )
   .name(
-    class="inline-block w-64"
+    class="w-64 flex-shrink-0"
   ) {{ name }} &nbsp;:
   .other(
-    class="inline-block"
+    class=""
   ) {{ data }}
 </template>
 <script>

@@ -1,15 +1,15 @@
 <template lang="pug">
 .tree-item-copyg(
-  class="hover:bg-slate-100 whitespace-nowrap"
+  class="hover:bg-slate-100 flex flex-row"
 )
   Indent(
     :depth="depth"
   )
   .name(
-    class="inline-block w-64"
+    class="w-64 flex-shrink-0"
   ) {{ name }} &nbsp;:
   .string(
-    class="inline-block text-purple-700"
+    class="text-purple-700"
   ) {{ data }}
 </template>
 <script>
