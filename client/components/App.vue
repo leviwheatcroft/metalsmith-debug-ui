@@ -33,7 +33,6 @@ const App = {
       .then((res) => {
         res.json()
           .then((snapshots) => {
-            console.log(snapshots)
             app.snapshots = snapshots.snapshots
           })
       })
@@ -46,7 +45,6 @@ const App = {
       .then((res) => {
           res.text()
             .then((log) => {
-              console.log(log)
               app.log = log
             })
         })
