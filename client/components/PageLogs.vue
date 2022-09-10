@@ -4,6 +4,32 @@
 )
   Nav
   .body(
+    v-if="!logItems.length"
+    class="mt-16 mx-auto container"
+  )
+    .no-logs(
+      class="mx-auto w-60"
+    )
+      h1(
+        class="text-2xl"
+      ) Oof. No logs!
+      div
+        p(
+          class="mt-4"
+        )
+          | Metalsmith doesn't seem to be generating any logs?!
+        p(
+          class="mt-4"
+        )
+          | You might need to set the environment variable:
+        p(
+          class="mt-4"
+        )
+          pre
+            | metalsmith.env('DEBUG', '*')
+
+  .body(
+    v-if="logItems.length"
     class="mt-16 mx-auto container"
   )
     .filter(
