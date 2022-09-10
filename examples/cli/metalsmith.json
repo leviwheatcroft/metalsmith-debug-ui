@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "sitename": "My Static Site & Blog",
+    "description": "It's about saying »Hello« to the World.",
+    "generator": "Metalsmith",
+    "url": "https://metalsmith.io/"
+  },
+  "plugins": [
+    { "../../lib/index.js": {} },
+    { "@metalsmith/collections": { "posts": "posts/*.md" } },
+    { "@metalsmith/markdown": {} },
+    { "@metalsmith/permalinks": {} },
+    { "@metalsmith/layouts": {} }
+  ]
+}
