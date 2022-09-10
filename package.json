@@ -20,7 +20,8 @@
   },
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "webpack": "webpack --watch --config webpack.config.js",
+    "webpack": "webpack --config webpack.config.js",
+    "webpack-watch": "webpack --watch --config webpack.config.js",
     "browsersync": "node browsersync"
   },
   "dependencies": {
