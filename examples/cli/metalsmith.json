@@ -5,11 +5,16 @@
     "generator": "Metalsmith",
     "url": "https://metalsmith.io/"
   },
+  "env": {
+    "DEBUG": "*"
+  },
   "plugins": [
     { "../../lib/index.js": {} },
     { "@metalsmith/collections": { "posts": "posts/*.md" } },
+    { "../../lib/index.js": {} },
     { "@metalsmith/markdown": {} },
     { "@metalsmith/permalinks": {} },
-    { "@metalsmith/layouts": {} }
+    { "@metalsmith/layouts": {} },
+    { "../../lib/index.js": {} }
   ]
 }
