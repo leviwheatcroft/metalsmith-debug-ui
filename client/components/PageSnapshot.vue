@@ -7,7 +7,7 @@
     class="flex flex-row gap-4 container items-start mx-auto mt-8"
   )
     .snapshot-list(
-      class="w-52 mr-8"
+      class="w-52 mr-8 flex-shrink-0"
     )
       h1(
         class="text-2xl"
@@ -15,7 +15,7 @@
       ul
         li.snapshot-list-item(
           :class="{'bg-slate-300': state.selectedSnapshot === idx }"
-          class="p-4 cursor-pointer"
+          class="px-4 py-1 cursor-pointer"
           v-for="(snapshot, idx) in snapshots"
           :key="idx"
           @click="setState('selectedSnapshot', idx)"
