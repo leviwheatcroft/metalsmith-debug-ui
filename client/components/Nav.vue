@@ -3,7 +3,7 @@ Nav(
   class="bg-slate-700 text-slate-100"
 )
   .nav(
-    class="container mx-auto flex flex-row gap-4 m-2"
+    class="container mx-auto flex flex-row gap-4 m-2 px-8"
   )
     .brand(
       class="text-xl leading-10"
@@ -23,11 +23,20 @@ Nav(
     )
     .github(
       class="leading-10"
-    ) github
+    )
+      a(
+        href="https://github.com/leviwheatcroft/metalsmith-debug-ui"
+        class="relative top-2.5"
+      )
+        IconGithub
 </template>
 <script>
 const { state, setState } = require('../store')
+const { default: IconGithub } = require('./IconGithub')
 const Nav = {
+  components: {
+    IconGithub
+  },
   data () {
     return {
       state
