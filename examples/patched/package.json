@@ -1,16 +1,15 @@
 {
   "name": "patched",
-  "private": false,
   "type": "module",
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "jstransformer-handlebars": "^1.2.0",
-    "metalsmith": "^2.5.0",
     "@metalsmith/collections": "^1.2.1",
     "@metalsmith/layouts": "^2.5.1",
     "@metalsmith/markdown": "^1.5.0",
-    "@metalsmith/permalinks": "^2.4.0"
+    "@metalsmith/permalinks": "^2.4.0",
+    "jstransformer-handlebars": "^1.2.0",
+    "metalsmith": "^2.5.0"
   },
   "devDependencies": {
     "serve": "^13.0.2"

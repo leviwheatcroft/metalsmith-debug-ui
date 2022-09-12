@@ -3,7 +3,7 @@ import markdown from '@metalsmith/markdown'
 import layouts from '@metalsmith/layouts'
 import permalinks from '@metalsmith/permalinks'
 import collections from '@metalsmith/collections'
-// import snapshot from 'metalsmith-debug-ui'
+// import debugUiPatch from 'metalsmith-debug-ui/patch'
 import debugUiPatch from '../../lib/patch.js'
 
 const metalsmith = Metalsmith('./')
